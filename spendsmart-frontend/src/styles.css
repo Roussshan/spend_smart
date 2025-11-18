@@ -1,0 +1,166 @@
+﻿:root{
+  --bg:#071224;
+  --glass: rgba(255,255,255,0.03);
+  --muted: #bcd7ff88;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+html,body,#root{height:100%;margin:0;background: radial-gradient(circle at 10% 10%, #0b1b2b 0%, #071224 50%, #040917 100%); color:#fff;}
+.header{padding:22px;text-align:center;}
+.header h1{margin:0;background: linear-gradient(90deg,#fff,#ffd166); -webkit-background-clip:text; color:transparent; font-size:26px;}
+.sub{color:var(--muted);margin-top:6px;}
+
+.main-grid{display:flex;gap:18px;padding:18px;align-items:flex-start;}
+.left-col{flex:1;display:flex;flex-direction:column;gap:18px;}
+.right-col{width:420px;}
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.04);
+  padding:14px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.6);
+}
+
+.add-form{display:flex;gap:10px;align-items:center;padding:12px;border-radius:10px;background:var(--glass);}
+.add-form input, .add-form select{padding:8px 10px;border-radius:8px;border:none;background:transparent;color:#fff;outline:none;border:1px solid rgba(255,255,255,0.04);}
+.btn{padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:700;background:linear-gradient(90deg,#7afcff,#7ab4ff);color:#021;box-shadow:0 8px 24px rgba(122,179,255,0.12);}
+
+.cards{display:flex;gap:12px;margin-top:12px;}
+.small-card{flex:1;padding:12px;border-radius:12px;color:#021;background:linear-gradient(135deg,#ffd166,#ff7a7a);font-weight:700;}
+
+.tx-list{margin-top:12px;max-height:320px;overflow:auto;}
+.tx-item{display:flex;justify-content:space-between;padding:10px;border-radius:10px;margin-bottom:8px;background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));}
+.badge{padding:6px 8px;border-radius:8px;font-size:12px;background: rgba(255,255,255,0.03);color:#fff;}
+
+.map-wrap{height:420px;border-radius:12px;overflow:hidden;margin-top:8px;}
+
+.toast-wrapper{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:999;}
+.toast{background:linear-gradient(135deg,#7afcff,#7ab4ff);color:#012;padding:12px 14px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.6);font-weight:700;}
+
+
+/* Dashboard + transactions styling */
+
+.dashboard-card {
+  background: linear-gradient(180deg, rgba(8,20,30,.7), rgba(4,12,20,.6));
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(4,12,20,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+
+/* small cards */
+.cards {
+  display:flex;
+  gap:12px;
+}
+.small-card {
+  flex:1;
+  border-radius:12px;
+  padding:14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow: 0 6px 18px rgba(2,8,16,0.6);
+}
+
+/* transaction list */
+.tx-list { margin-top: 16px; }
+.tx-item {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  padding:14px;
+  border-radius:10px;
+  margin-top:10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border: 1px solid rgba(255,255,255,0.02);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.tx-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(2,8,20,0.45);
+}
+
+/* badges */
+.badge {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding:8px 10px;
+  border-radius:8px;
+  font-weight:700;
+  font-size:12px;
+  color:#e8f6ff;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* transaction buttons */
+.tx-btn {
+  cursor:pointer;
+  padding:6px 10px;
+  border-radius:8px;
+  border: none;
+  font-weight:700;
+  font-size:13px;
+  box-shadow: 0 6px 16px rgba(2,8,20,0.35);
+  transition: transform .12s ease, opacity .12s ease;
+  opacity:0.95;
+}
+.tx-btn:hover { transform: translateY(-3px); opacity:1; }
+
+/* different color themes */
+.tx-edit {
+  background: linear-gradient(90deg,#ffd86b,#ff9a9e);
+  color: #1b1b1b;
+}
+.tx-delete {
+  background: linear-gradient(90deg,#ff7a7a,#ff4b6b);
+  color: #fff;
+}
+
+/* the top "View All" button style */
+.btn.btn-outline {
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:transparent;
+  color: #cfe7ff;
+  cursor:pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn.btn-outline:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(2,8,20,0.45); }
+
+/* small entrance animation */
+@keyframes slideInUp {
+  from { opacity:0; transform: translateY(8px) scale(.995); }
+  to { opacity:1; transform: translateY(0) scale(1); }
+}
+.animated-row { animation: slideInUp .28s cubic-bezier(.2,.9,.2,1); }
+
+/* make sure buttons look good on mobile */
+@media (max-width:720px) {
+  .tx-item { flex-direction:column; align-items:flex-start; }
+  .tx-btn { width:110px; text-align:center; }
+}
+
+
+/* put tx-list above map overlays and make buttons clickable */
+.tx-list {
+  position: relative;   /* create stacking context */
+  z-index: 600;         /* high so it sits on top of leaflet/map layer */
+  pointer-events: auto;
+}
+
+/* make sure the tx-item and child elements accept pointer events */
+.tx-item, .tx-item * {
+  pointer-events: auto !important;
+}
+
+/* bring buttons above everything within the list */
+.tx-btn {
+  position: relative;
+  z-index: 601;
+  pointer-events: auto !important;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* styling for clarity while debugging (remove later) */
+.tx-btn.tx-edit { box-shadow: 0 6px 18px rgba(122,191,255,0.12); }
+.tx-btn.tx-delete { box-shadow: 0 6px 18px rgba(255,100,120,0.12); }

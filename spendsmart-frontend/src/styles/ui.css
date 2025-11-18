@@ -1,0 +1,253 @@
+/* ui.css
+   Colorful, modern, glassy UI + animations for SpendSmart
+   - Use class names like .app, .site-header, .card, .sidebar, .btn, .input.
+*/
+
+/* ---------- variables ---------- */
+:root{
+  --bg-1: #071126; /* deep navy */
+  --bg-2: #0b2b3c; /* tealish */
+  --accent-1: #63e1ff; /* cyan */
+  --accent-2: #ff8fa3; /* coral */
+  --accent-3: #ffd166; /* warm yellow */
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.06);
+  --card-radius: 14px;
+  --card-padding: 20px;
+  --glass-blur: 8px;
+  --easing: cubic-bezier(.2,.9,.3,1);
+  --shadow-1: 0 6px 20px rgba(3,8,15,0.6);
+  --muted: rgba(255,255,255,0.55);
+}
+
+/* ---------- page background (animated gradient) ---------- */
+html,body,#root {
+  height:100%;
+  margin:0;
+}
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #e9f2ff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background: linear-gradient(180deg, rgba(6,18,30,1) 0%, rgba(3,22,28,1) 40%, rgba(6,14,30,1) 100%);
+  overflow-y: auto;
+}
+
+/* animated diagonal sheen / gradient */
+body::before{
+  content:"";
+  position:fixed;
+  left:-20%;
+  top:-40%;
+  width:160%;
+  height:140%;
+  background: linear-gradient(120deg, rgba(99,225,255,0.08), rgba(255,143,163,0.06), rgba(255,209,102,0.04));
+  transform: rotate(-8deg);
+  pointer-events:none;
+  filter: blur(40px);
+  animation: bgShift 12s linear infinite;
+  mix-blend-mode:overlay;
+  z-index:0;
+}
+@keyframes bgShift {
+  0% { transform: rotate(-8deg) translateX(-5%); opacity:0.9; }
+  50% { transform: rotate(-6deg) translateX(5%); opacity:1; }
+  100% { transform: rotate(-8deg) translateX(-5%); opacity:0.9; }
+}
+
+/* ---------- base layout helpers ---------- */
+.app {
+  position:relative;
+  z-index:1;
+  padding:28px 36px;
+  max-width:1400px;
+  margin:0 auto;
+  box-sizing:border-box;
+}
+
+/* centered header */
+.site-header {
+  text-align:center;
+  margin-bottom:22px;
+  pointer-events:auto;
+}
+.site-title {
+  font-weight:700;
+  font-size:28px;
+  letter-spacing:0.6px;
+  color: #fff7d9;
+  text-shadow: 0 6px 24px rgba(0,0,0,0.5);
+  margin:0;
+}
+.site-sub {
+  margin-top:6px;
+  color: rgba(230,245,255,0.7);
+  font-size:13px;
+}
+
+/* main grid (left content + sidebar) */
+.main-grid {
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap: 28px;
+  align-items:start;
+}
+
+/* ---------- glassy cards ---------- */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-1);
+  transition: transform .45s var(--easing), box-shadow .45s var(--easing), background .45s var(--easing);
+  will-change: transform;
+}
+.card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(2,7,20,0.6);
+}
+.card.small { padding:12px; border-radius:12px; }
+
+/* title inside card */
+.card h3{
+  margin:0 0 10px 0;
+  color: #f5f9ff;
+  font-size:16px;
+}
+
+/* Dashboard panels row helpers */
+.row {
+  display:flex;
+  gap:18px;
+  align-items:stretch;
+}
+
+/* little accent pill (gradient) */
+.pill {
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:600;
+  font-size:13px;
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  color:#02121a;
+  box-shadow: 0 6px 18px rgba(99,225,255,0.07), inset 0 -2px 8px rgba(255,255,255,0.06);
+}
+
+/* ---------- controls: buttons & inputs ---------- */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+  border: none;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color:#02121a;
+  transition: transform .18s var(--easing), box-shadow .18s var(--easing), filter .18s;
+  box-shadow: 0 8px 20px rgba(99,225,255,0.06);
+}
+.btn:hover{ transform: translateY(-3px) scale(1.01); filter:brightness(1.02); }
+.btn.ghost {
+  background: transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color: var(--muted);
+}
+
+/* inputs */
+.input, input, textarea, select {
+  display:inline-block;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.04);
+  background: rgba(10,18,26,0.35);
+  color: #eaf6ff;
+  outline:none;
+  transition: box-shadow .18s, border-color .18s;
+}
+.input:focus, input:focus, textarea:focus {
+  box-shadow: 0 8px 26px rgba(99,225,255,0.06);
+  border-color: rgba(99,225,255,0.32);
+}
+
+/* small text */
+.muted { color: rgba(235,245,255,0.6); font-size:13px; }
+
+/* ---------- sidebar specific ---------- */
+.sidebar {
+  position:relative;
+  height: calc(100vh - 120px); /* ensure it's scrollable region */
+  overflow:auto;
+  padding:18px;
+  box-sizing:border-box;
+}
+.sidebar .card { margin-bottom:14px; }
+
+/* ensure controls inside sidebar are full width */
+.sidebar .input, .sidebar .btn {
+  width:100%;
+  box-sizing:border-box;
+}
+
+/* nice list for zones */
+.zone-item {
+  padding:12px;
+  border-radius:10px;
+  background: rgba(4,12,20,0.18);
+  border: 1px solid rgba(255,255,255,0.03);
+  margin-bottom:12px;
+}
+
+/* ---------- map tweaks ---------- */
+.map-panel { display:flex; flex-direction:column; height:100%; }
+.map-wrapper { height: 400px; width:100%; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.03); }
+.leaflet-container { height:100% !important; width:100% !important; }
+
+/* nudge controls inside the sidebar so they don't overflow the window edge */
+.leaflet-top.leaflet-right { right: 12px !important; }
+
+/* ---------- animations ---------- */
+.fade-in {
+  animation: fadeUp .6s var(--easing) both;
+}
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(10px) scale(.995); }
+  to { opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* shimmering accent bars */
+.accent-bar {
+  height:6px;
+  border-radius:999px;
+  background: linear-gradient(100deg, rgba(99,225,255,0.95), rgba(255,143,163,0.95), rgba(255,209,102,0.95));
+  animation: slide 4s linear infinite;
+}
+@keyframes slide {
+  from{ background-position: 0% 50%; }
+  50%{ background-position: 100% 50%; }
+  to{ background-position: 0% 50%; }
+}
+
+/* card-level floating motion for subtle life */
+.float {
+  animation: floaty 5s ease-in-out infinite;
+}
+@keyframes floaty {
+  0%{ transform: translateY(0px); }
+  50%{ transform: translateY(-6px); }
+  100%{ transform: translateY(0px); }
+}
+
+/* small responsive improvements */
+@media (max-width:1100px){
+  .main-grid { grid-template-columns: 1fr; }
+  .sidebar { height:auto; max-width:100%; order:2; }
+  .map-wrapper { height:320px; }
+}
+

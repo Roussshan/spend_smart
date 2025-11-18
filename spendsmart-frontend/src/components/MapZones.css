@@ -1,0 +1,171 @@
+﻿/* src/components/MapZones.css - glossy UI for MapZones component */
+
+:root{
+  --bg: #071021;
+  --panel: linear-gradient(135deg,#0f1724 0%, #0b1420 100%);
+  --card: linear-gradient(135deg,#14202a 0%, #1b2b34 100%);
+  --accent: linear-gradient(90deg,#00d2ff,#3a7bd5);
+  --muted: #9aa7b2;
+  --glass: rgba(255,255,255,0.03);
+}
+
+/* layout */
+.mz-layout{
+  display:flex;
+  flex-direction:row;
+  height:80vh;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow: 0 8px 40px rgba(2,8,23,0.6);
+  background: var(--bg);
+}
+
+/* side panel */
+.mz-panel{
+  width:360px;
+  min-width:280px;
+  background: var(--panel);
+  padding:18px;
+  color:#d8eefc;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  box-sizing:border-box;
+  border-right: 1px solid rgba(255,255,255,0.03);
+}
+
+/* header */
+.mz-header h2{
+  margin:0;
+  font-size:20px;
+  letter-spacing:0.2px;
+}
+.mz-sub{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* controls */
+.mz-controls{ display:flex; gap:8px; margin-top:8px; }
+.btn-gloss{
+  background: var(--accent);
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  box-shadow: 0 6px 18px rgba(58,123,213,0.18);
+  transition:transform .12s ease;
+}
+.btn-gloss:active{ transform:translateY(1px) }
+.btn-gloss.alt{
+  background: linear-gradient(90deg,#ff6b6b,#ff9068);
+  box-shadow: 0 6px 18px rgba(255,107,107,0.12);
+}
+
+/* sections */
+.mz-section{ background: var(--glass); padding:12px; border-radius:10px; }
+.mz-section h3{ margin:0 0 8px 0; font-size:14px; color:#cfe7ff; }
+.mz-form .mz-row{ display:flex; gap:8px; margin-bottom:8px; }
+.mz-form input{
+  flex:1;
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.02);
+  color:#e6f7ff;
+}
+
+/* list */
+.mz-list{ display:flex; flex-direction:column; gap:8px; max-height:260px; overflow:auto; padding-right:6px; }
+.mz-card{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px; border-radius:10px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: inset 0 -6px 18px rgba(0,0,0,0.25);
+}
+.mz-label{ font-weight:700; color:#fff; }
+.mz-meta{ font-size:12px; color:var(--muted) }
+
+/* card right */
+.mz-card-right{ display:flex; gap:8px; align-items:center; }
+.btn-delete{
+  background: transparent; border:1px solid rgba(255,255,255,0.04);
+  color:#ffb4b4; padding:6px 8px; border-radius:8px; cursor:pointer;
+}
+.btn-center{
+  background: rgba(255,255,255,0.02); border:none; padding:6px 8px; color:#cfe7ff; border-radius:8px; cursor:pointer;
+}
+
+/* footer */
+.mz-footer{ margin-top:auto; font-size:12px; color:var(--muted); display:flex; flex-direction:column; gap:6px; }
+
+/* map area */
+.mz-map{ flex:1; background: radial-gradient(circle at 10% 10%, #071223, #04101a); position:relative; }
+
+/* small helper classes */
+.mz-empty{ color:var(--muted); text-align:center; padding:12px; }
+.mz-error{ color:#ffb4b4; }
+
+/* responsive */
+@media (max-width:2000px){
+  .mz-panel{ width: 3200px; }
+  .mz-layout{ flex-direction:column; height:125vh; }
+  .mz-map{ height: calc(100% - 320px); }
+}
+/* ensure layout takes full available width */
+.mz-layout {
+  width: 100%;
+  min-width: 0; /* important for flex children to shrink correctly */
+}
+
+/* allow the map flex child to shrink properly in narrow layouts */
+.mz-map {
+  flex: 1 1 auto;
+  min-width: 0;  /* <--- VERY important so map isn't forced to overflow and show tiny */
+}
+
+/* keep leaflet container full size */
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 200px;
+}
+
+/* src/components/MapZones.css */
+
+/* the right-hand panel's map area */
+.map-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* ensure parent can control height */
+}
+
+/* wrapper that defines the visible map height — tweak offset if you have a header */
+.map-wrapper {
+  /* Make the map fill the remaining vertical space in the sidebar.
+     If your header is 120px and you want map to start below it, use calc.
+     If the sidebar itself is positioned inside a tall parent, you can use 100% instead. */
+  height: calc(100vh - 160px); /* <- adjust "160px" to match your header + spacing */
+  width: 100%;
+}
+
+/* ensures leaflet's container takes full wrapper */
+.leaflet-map,
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* small style tweak so map controls don't overflow the sidebar */
+.leaflet-control {
+  box-shadow: none;
+}
+
+/* optionally: move control buttons slightly inside the panel */
+.leaflet-top.leaflet-right {
+  right: 10px; /* nudges controls leftwards so they don't stick to the window edge */
+}
+
